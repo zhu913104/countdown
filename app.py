@@ -1,9 +1,20 @@
-from flask import Flask
+from flask import Flask, jsonify, request,render_template
+import datetime
 app = Flask(__name__)
 
-@app.route("/")
-def home():
-    return "Hello world"
 
-if __name__=="__main__":
-    app.run()
+@app.route('/process', methods=['POST'])
+def process():
+    date = days(request.form['date'])
+    return render_template("process.html",date=date)
+@app.route("/about")
+def about():
+    return render_template("about.html")
+
+def days(Targetdate):
+    today = datetime.datetime.now()
+    targetd = datetime.datetime.strptime(Targetdate,"%Y-%m-%d")
+    return str(targetd-today).split(' days')[0]
+
+if __name__ == '__main__':
+    app.run(debug=True)
