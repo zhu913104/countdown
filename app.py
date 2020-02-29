@@ -7,9 +7,9 @@ app = Flask(__name__)
 def process():
     date = days(request.form['date'])
     return render_template("process.html",date=date)
-@app.route("/about")
+@app.route("/Calcuday")
 def about():
-    return render_template("about.html")
+    return render_template("Calcuday.html")
 
 def days(Targetdate):
     today = datetime.datetime.now()
